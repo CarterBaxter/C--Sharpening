@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model List<TestApp1.Models.Claim>
+
+<div class="text-center">
+    <h1 class="display-4">Claims</h1>
+    <p>Manage your insurance claims here.</p>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Claim ID</th>
+                <th>Holder Name</th>
+                <th>Loss Type</th>
+                <th>Status</th>
+                <th>Est. Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Claim claim in Model)
+            {
+                <tr>
+                    <td>@claim.ClaimId</td>
+                    <td>@claim.PolicyholderName</td>
+                    <td>@claim.LossType</td>
+                    <td>@claim.Status</td>
+                    <td>$XXX</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

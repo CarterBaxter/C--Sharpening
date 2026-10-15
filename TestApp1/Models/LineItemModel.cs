@@ -24,4 +24,5 @@ public enum CategoryType
     Labor,
     Materials,
     Equipment,
+    PersonalProperty,
 }
