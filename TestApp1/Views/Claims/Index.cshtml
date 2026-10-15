@@ -25,7 +25,7 @@
                     <td>@claim.PolicyholderName</td>
                     <td>@claim.LossType</td>
                     <td>@claim.Status</td>
-                    <td>$XXX</td>
+                    <td>$@claim.LineItems.CalculateTotalCost()</td>
                 </tr>
             }
         </tbody>

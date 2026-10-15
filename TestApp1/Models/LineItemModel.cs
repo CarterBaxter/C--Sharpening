@@ -14,7 +14,12 @@ public class LineItem
     public decimal CostPerUnit { get; set; } = 0.0m;
 
     // units might not always be whole either so using decimal again
-    public decimal Units { get; set; } = 0.0m; 
+    public decimal Units { get; set; } = 0.0m;
+
+    public decimal TotalCost()
+    {
+        return CostPerUnit * Units;
+    }
 }
 
 

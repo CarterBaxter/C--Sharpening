@@ -56,3 +56,25 @@ overview. After that I cant decide if I want to make the editing
 and viewing of an individual claim a new page or just drop down or
 a overlay frame or something. I need to remember not to get too
 fancy tho cuz I wanna get to the testing suite.
+
+### Log 3 - decoupling via interfaces 
+
+So I left to eat and came back with new ideas of where I should
+probably go next. I want to decouple and decrease how much that
+controller is currently doing, so I am going to make an interface
+for collections of claims and collections of line items.
+
+Im still going to keep the dummy data hardcoded for now just so
+something is in the claims collections by default and I dont have 
+to create it every time. I dont know if I'll get to seperating it
+into an actual database because I want to get to the testing suite
+so it might just stay as is now that its seperated and the interface
+keeps the app itself from being dependent on how that data is stored
+
+Im adding the calculate total to the line items themselves so aggregateing in the LineItemsCollection isn't as dependent
+
+Sweet That feels alot cleaner and now the calculate total cost is
+working. I dont love that I have to go into the claims line items
+and then call calculate total cost and think maybe its better
+practice to have a function in claim that calls that on lineItems
+for it, but for now this is fine.
