@@ -15,6 +15,7 @@
                 <th>Loss Type</th>
                 <th>Status</th>
                 <th>Est. Total</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +27,9 @@
                     <td>@claim.LossType</td>
                     <td>@claim.Status</td>
                     <td>$@claim.LineItems.CalculateTotalCost()</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@claim.ClaimId" class="btn btn-primary">View Details</a>
+                    </td>
                 </tr>
             }
         </tbody>

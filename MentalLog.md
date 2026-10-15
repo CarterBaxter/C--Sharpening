@@ -78,3 +78,21 @@ working. I dont love that I have to go into the claims line items
 and then call calculate total cost and think maybe its better
 practice to have a function in claim that calls that on lineItems
 for it, but for now this is fine.
+
+### Log 4 - More Details of Individual Claims
+
+I think I am going to just make a new view that will have
+another table that shows all of a claims line items and details
+
+I forgot how to redirect to the automatic 404 page so looked that up.
+Otherwise this has been smooth sailing. Idk Im trying to write down my
+thoughts but It's hard to slow down at times and do that especially when 
+I don't feel like I'm doing anything novel for this project, I already
+kinda talked through making a view and stuff.
+
+Everything is a table and for now thats fine. If I wanted it to look nice
+I would be putting in that effort but I'd rather get functionality down
+so I can move to testing
+
+This is probably my last bit for tonight but tomorrow I should be able to
+finish the functionality and then start the testing.

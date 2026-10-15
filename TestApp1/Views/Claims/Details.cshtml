@@ -1,0 +1,70 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model TestApp1.Models.Claim
+
+<div class="text-center">
+    <h1 class="display-4">Claim Details</h1>
+    <p>View the details of your insurance claim.</p>
+    <a asp-action="Index" class="btn btn-primary">Back to Claims List</a>
+
+    <br/>
+
+    <h2>Claim Information for: @Model.ClaimId</h2>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <td><strong>Policyholder Name:</strong></td>
+                <td>@Model.PolicyholderName</td>
+            </tr>
+            <tr>
+                <td><strong>Policy Address:</strong></td>
+                <td>@Model.PolicyAddress</td>
+            </tr>
+            <tr>
+                <td><strong>Policy Number:</strong></td>
+                <td>@Model.PolicyNumber</td>
+            </tr>
+            <tr>
+                <td><strong>Filed Date:</strong></td>
+                <td>@Model.FiledDate.ToShortDateString()</td>
+            </tr>
+            <tr>
+                <td><strong>Status:</strong></td>
+                <td>@Model.Status</td>
+            </tr>
+            <tr>
+                <td><strong>Loss Type:</strong></td>
+                <td>@Model.LossType</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br/>
+
+    <h3>Line Items</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Cost Per Unit</th>
+                <th>Units</th>
+                <th>Line Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (LineItem item in Model.LineItems.GetLineItems())
+            {
+                <tr>
+                    <td>@item.Description</td>
+                    <td>@item.Category</td>
+                    <td>$@item.CostPerUnit</td>
+                    <td>@item.Units</td>
+                    <td>$@item.TotalCost()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

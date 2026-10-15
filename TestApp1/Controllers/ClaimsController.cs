@@ -19,4 +19,14 @@ public class ClaimsController : Controller
         return View(Claims);
     }
 
+    public IActionResult Details(int id)
+    {
+        Claim? claim = _claimsCollection.GetClaimById(id);
+        if (claim == null)
+        {
+            return NotFound();
+        }
+        return View(claim);
+    }
+
 }

@@ -18,7 +18,7 @@ public class LineItem
 
     public decimal TotalCost()
     {
-        return CostPerUnit * Units;
+        return Math.Round(CostPerUnit * Units, 2);
     }
 }
 
