@@ -96,3 +96,31 @@ so I can move to testing
 
 This is probably my last bit for tonight but tomorrow I should be able to
 finish the functionality and then start the testing.
+
+
+### Log 5 - Alright new day lets crunch this out
+
+I want to sit down and get the rest going. I am first going to review
+the requirements to refocus what I wanted to get done functionally before
+I start the testing. My interview is tomorrow morning so tonight is the night
+of study.
+
+I need a way to filter by status and loss type on claims
+
+I need claim creation, editing, deletion interfacing and logic
+this also goes with the lineitem creation and editing
+
+I need to add the tax calculations for materials and add deductibles
+to claims (I could add them to a policy obj but that might be scope creep)
+then show the net payable (kinda regretting forgetting these earlier)
+
+Then I need a stauts transition management and then also should fix up the
+requirements/code to align for what the statuses are named. Full disclosure
+I had AI generate the requirements from my concept that way I was working 
+like I would if a client gave me the requirements. However I should have
+checked it for consistency before getting into it.
+
+I am considering having ai finish the rest so I can get to testing but we
+will see how long this takes me. That could also have the added benefit of
+allowing me to simulate the work environment where I am testing code I didn't
+write myself, but I'll be playing it by ear.
