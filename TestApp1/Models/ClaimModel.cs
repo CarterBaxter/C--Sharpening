@@ -30,6 +30,49 @@ public class Claim
     {
         return LineItems.CalculateTotalCostWithTax();
     }
+
+    // The status workflow: which statuses each status is allowed to move to.
+    // Anything not listed here is skipping a step or moving backward.
+    private static readonly Dictionary<StatusType, StatusType[]> AllowedTransitions = new()
+    {
+        [StatusType.None] = [StatusType.Open],
+        [StatusType.Open] = [StatusType.InReview],
+        [StatusType.InReview] = [StatusType.Approved, StatusType.Denied],
+        [StatusType.Approved] = [],
+        [StatusType.Denied] = [],
+    };
+
+    // Once a claim reaches InReview it (and its line items) are locked
+    public bool CanEdit => Status is StatusType.None or StatusType.Open;
+
+    public bool CanDelete => Status == StatusType.Open;
+
+    public IReadOnlyList<StatusType> GetAllowedNextStatuses()
+    {
+        return AllowedTransitions[Status];
+    }
+
+    // Follows the same pattern as int.TryParse: returns whether it worked
+    // and hands back the reason through the out parameter when it didn't.
+    public bool TryTransitionTo(StatusType newStatus, out string error)
+    {
+        if (!AllowedTransitions[Status].Contains(newStatus))
+        {
+            error = $"A claim can't move from {Status} to {newStatus}. "
+                + "Claims must go Open → InReview → Approved or Denied, without skipping steps or moving backward.";
+            return false;
+        }
+
+        if (newStatus == StatusType.InReview && LineItems.GetLineItems().Count == 0)
+        {
+            error = "A claim needs at least one line item before it can move to InReview.";
+            return false;
+        }
+
+        Status = newStatus;
+        error = "";
+        return true;
+    }
 }
 
 public enum LossType

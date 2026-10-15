@@ -1,0 +1,37 @@
+@model ClaimFormViewModel
+
+@* Shared by Create and Edit so the fields only live in one place *@
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="mb-3">
+    <label asp-for="PolicyholderName"></label>
+    <input asp-for="PolicyholderName" class="form-control" />
+    <span asp-validation-for="PolicyholderName" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="PolicyAddress"></label>
+    <input asp-for="PolicyAddress" class="form-control" />
+    <span asp-validation-for="PolicyAddress" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="PolicyNumber"></label>
+    <input asp-for="PolicyNumber" class="form-control" />
+    <span asp-validation-for="PolicyNumber" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="LossType"></label>
+    <select asp-for="LossType" asp-items='Html.GetEnumSelectList<LossType>().Where(i => i.Value != "0")' class="form-control">
+        <option value="0">-- Select --</option>
+    </select>
+    <span asp-validation-for="LossType" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="LossDate"></label>
+    <input asp-for="LossDate" class="form-control" />
+    <span asp-validation-for="LossDate" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Description"></label>
+    <textarea asp-for="Description" class="form-control"></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
+</div>

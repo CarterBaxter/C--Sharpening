@@ -1,0 +1,13 @@
+@{
+    ViewData["Title"] = "Edit Line Item";
+}
+
+@model LineItemFormViewModel
+
+<h1>Edit Line Item on Claim @Model.ClaimId</h1>
+
+<form asp-action="Edit" asp-route-claimId="@Model.ClaimId" asp-route-id="@Model.ItemId" method="post">
+    <partial name="_LineItemFields" model="Model" />
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-controller="Claims" asp-action="Details" asp-route-id="@Model.ClaimId" class="btn btn-secondary">Cancel</a>
+</form>

@@ -1,0 +1,26 @@
+@model LineItemFormViewModel
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="mb-3">
+    <label asp-for="Description"></label>
+    <input asp-for="Description" class="form-control" />
+    <span asp-validation-for="Description" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Category"></label>
+    <select asp-for="Category" asp-items='Html.GetEnumSelectList<CategoryType>().Where(i => i.Value != "0")' class="form-control">
+        <option value="0">-- Select --</option>
+    </select>
+    <span asp-validation-for="Category" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="CostPerUnit"></label>
+    <input asp-for="CostPerUnit" class="form-control" />
+    <span asp-validation-for="CostPerUnit" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Units"></label>
+    <input asp-for="Units" class="form-control" />
+    <span asp-validation-for="Units" class="text-danger"></span>
+</div>

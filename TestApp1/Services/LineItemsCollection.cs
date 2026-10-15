@@ -75,6 +75,7 @@ public class LineItemsCollection : ILineItemsCollection
 
     public void AddLineItem(LineItem lineItem)
     {
+        lineItem.ItemId = _lineItems.Count == 0 ? 1 : _lineItems.Max(item => item.ItemId) + 1;
         _lineItems.Add(lineItem);
     }
 

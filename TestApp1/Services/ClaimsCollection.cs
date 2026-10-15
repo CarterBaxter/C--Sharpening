@@ -62,6 +62,8 @@ public class ClaimsCollection : IClaimsCollection
 
     public void AddClaim(Claim claim)
     {
+        // The collection owns ID generation, the way a database would
+        claim.ClaimId = _claims.Count == 0 ? 1 : _claims.Max(c => c.ClaimId) + 1;
         _claims.Add(claim);
     }
 

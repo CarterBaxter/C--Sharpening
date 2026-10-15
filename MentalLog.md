@@ -140,3 +140,10 @@ wrong because I think it belongs in the model but what do I know Im sure
 it could work there too. I guess I'm still unsure whether I should have
 kept my models bare without methods or if keeping the methods are fine.
 I'll look up best practice later if there is one other than preference.
+
+### Log 7 - Status Changes and Requirement Finishing
+
+I think in the respect to my time as I want to have time to cook dinner
+tonight I am going to do the status changes myself because I know there
+are some inconsistencies there with the requirements and naming but 
+then I'll do the creation, editing, and deleting of claims and line items but then I'm going to have AI spot check me and fix up things I run through.

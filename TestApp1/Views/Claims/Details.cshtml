@@ -1,5 +1,5 @@
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Claim Details";
 }
 
 @model TestApp1.Models.Claim
@@ -8,6 +8,22 @@
     <h1 class="display-4">Claim Details</h1>
     <p>View the details of your insurance claim.</p>
     <a asp-action="Index" class="btn btn-primary">Back to Claims List</a>
+
+    @if (Model.CanEdit)
+    {
+        <a asp-action="Edit" asp-route-id="@Model.ClaimId" class="btn btn-secondary">Edit Claim</a>
+    }
+    @if (Model.CanDelete)
+    {
+        <form asp-action="Delete" asp-route-id="@Model.ClaimId" method="post" style="display:inline"
+              onsubmit="return confirm('Delete this claim?');">
+            <button type="submit" class="btn btn-danger">Delete Claim</button>
+        </form>
+    }
+    <div class="text-danger">@TempData["DeleteError"]</div>
+
+    @* TempData survives exactly one redirect, which is how the controller passes messages here *@
+    <div class="text-danger">@TempData["Error"]</div>
 
     <br/>
 
@@ -27,16 +43,34 @@
                 <td>@Model.PolicyNumber</td>
             </tr>
             <tr>
+                <td><strong>Date of Loss:</strong></td>
+                <td>@Model.LossDate.ToShortDateString()</td>
+            </tr>
+            <tr>
                 <td><strong>Filed Date:</strong></td>
                 <td>@Model.FiledDate.ToShortDateString()</td>
             </tr>
             <tr>
-                <td><strong>Status:</strong></td>
-                <td>@Model.Status</td>
-            </tr>
-            <tr>
                 <td><strong>Loss Type:</strong></td>
                 <td>@Model.LossType</td>
+            </tr>
+            <tr>
+                <td><strong>Description:</strong></td>
+                <td>@Model.Description</td>
+            </tr>
+            <tr>
+                <td><strong>Status:</strong></td>
+                <td>
+                    @Model.Status
+                    @foreach (StatusType next in Model.GetAllowedNextStatuses())
+                    {
+                        <form asp-action="ChangeStatus" asp-route-id="@Model.ClaimId" method="post" style="display:inline">
+                            <input type="hidden" name="newStatus" value="@next" />
+                            <button type="submit" class="btn btn-sm btn-outline-primary">Move to @next</button>
+                        </form>
+                    }
+                    <div class="text-danger">@TempData["StatusError"]</div>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -44,6 +78,10 @@
     <br/>
 
     <h3>Line Items</h3>
+    @if (Model.CanEdit)
+    {
+        <a asp-controller="LineItems" asp-action="Create" asp-route-claimId="@Model.ClaimId" class="btn btn-success">Add Line Item</a>
+    }
     <table class="table table-striped">
         <thead>
             <tr>
@@ -52,6 +90,11 @@
                 <th>Cost Per Unit</th>
                 <th>Units</th>
                 <th>Line Total</th>
+                <th>Tax</th>
+                @if (Model.CanEdit)
+                {
+                    <th>Actions</th>
+                }
             </tr>
         </thead>
         <tbody>
@@ -60,11 +103,40 @@
                 <tr>
                     <td>@item.Description</td>
                     <td>@item.Category</td>
-                    <td>$@item.CostPerUnit</td>
+                    <td>$@item.CostPerUnit.ToString("N2")</td>
                     <td>@item.Units</td>
-                    <td>$@item.TotalCost()</td>
+                    <td>$@item.TotalCost().ToString("N2")</td>
+                    <td>$@item.TaxAmount().ToString("N2")</td>
+                    @if (Model.CanEdit)
+                    {
+                        <td>
+                            <a asp-controller="LineItems" asp-action="Edit" asp-route-claimId="@Model.ClaimId" asp-route-id="@item.ItemId" class="btn btn-sm btn-secondary">Edit</a>
+                            <form asp-controller="LineItems" asp-action="Delete" asp-route-claimId="@Model.ClaimId" asp-route-id="@item.ItemId"
+                                  method="post" style="display:inline" onsubmit="return confirm('Remove this line item?');">
+                                <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                            </form>
+                        </td>
+                    }
                 </tr>
             }
+        </tbody>
+    </table>
+
+    <h3>Totals</h3>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td><strong>Subtotal:</strong></td>
+                <td>$@Model.LineItems.CalculateTotalCost().ToString("N2")</td>
+            </tr>
+            <tr>
+                <td><strong>Tax (6.5% on Materials):</strong></td>
+                <td>$@Model.LineItems.CalculateTotalTax().ToString("N2")</td>
+            </tr>
+            <tr>
+                <td><strong>Gross Total:</strong></td>
+                <td>$@Model.CalculateTotalClaimCost().ToString("N2")</td>
+            </tr>
         </tbody>
     </table>
 </div>

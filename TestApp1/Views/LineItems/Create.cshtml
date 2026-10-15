@@ -1,0 +1,13 @@
+@{
+    ViewData["Title"] = "Add Line Item";
+}
+
+@model LineItemFormViewModel
+
+<h1>Add Line Item to Claim @Model.ClaimId</h1>
+
+<form asp-action="Create" asp-route-claimId="@Model.ClaimId" method="post">
+    <partial name="_LineItemFields" model="Model" />
+    <button type="submit" class="btn btn-primary">Add Line Item</button>
+    <a asp-controller="Claims" asp-action="Details" asp-route-id="@Model.ClaimId" class="btn btn-secondary">Cancel</a>
+</form>

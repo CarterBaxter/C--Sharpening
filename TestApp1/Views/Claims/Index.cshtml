@@ -7,6 +7,7 @@
 <div class="text-center">
     <h1 class="display-4">Claims</h1>
     <p>Manage your insurance claims here.</p>
+    <a asp-action="Create" class="btn btn-success">New Claim</a>
 
     <form method="get" asp-action="Index">
         <h3>Filters</h3>
@@ -42,7 +43,7 @@
                     <td>@claim.PolicyholderName</td>
                     <td>@claim.LossType</td>
                     <td>@claim.Status</td>
-                    <td>$@claim.CalculateTotalClaimCost()</td>
+                    <td>$@claim.CalculateTotalClaimCost().ToString("N2")</td>
                     <td>
                         <a asp-action="Details" asp-route-id="@claim.ClaimId" class="btn btn-primary">View Details</a>
                     </td>

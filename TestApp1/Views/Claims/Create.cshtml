@@ -1,0 +1,13 @@
+@{
+    ViewData["Title"] = "New Claim";
+}
+
+@model ClaimFormViewModel
+
+<h1>New Claim</h1>
+
+<form asp-action="Create" method="post">
+    <partial name="_ClaimFields" model="Model" />
+    <button type="submit" class="btn btn-primary">Create Claim</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
