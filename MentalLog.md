@@ -124,3 +124,19 @@ I am considering having ai finish the rest so I can get to testing but we
 will see how long this takes me. That could also have the added benefit of
 allowing me to simulate the work environment where I am testing code I didn't
 write myself, but I'll be playing it by ear.
+
+### Log 6 - Filtering & Tax
+
+I am going to add a filter function for filtering by status and loss type
+then I am going to fix the total cost calculation to include tax
+
+Filtering isnt too bad hardest part was figuring out the cleanest way
+to get the selected values to persist. Not too bad. 
+
+But I guess I am going to add more cost logic in the claims collection
+service like I thought I should've earlier. Also I think the requirement
+where it said the estimate calculations should be in a service class is
+wrong because I think it belongs in the model but what do I know Im sure
+it could work there too. I guess I'm still unsure whether I should have
+kept my models bare without methods or if keeping the methods are fine.
+I'll look up best practice later if there is one other than preference.

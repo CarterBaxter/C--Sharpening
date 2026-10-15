@@ -25,6 +25,11 @@ public class Claim
     // list items to have a claim Id because it would be in a database,
     // but for code its kinda nice to be able to reference either way.
     public ILineItemsCollection LineItems { get; set; } = new LineItemsCollection(); 
+
+    public decimal CalculateTotalClaimCost()
+    {
+        return LineItems.CalculateTotalCostWithTax();
+    }
 }
 
 public enum LossType
@@ -39,6 +44,7 @@ public enum StatusType
 {
     None,
     Open,
-    Closed,
+    InReview,
+    Approved,
     Denied,
 }

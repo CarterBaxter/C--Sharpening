@@ -38,9 +38,21 @@ public class ClaimsCollection : IClaimsCollection
         _claims = new List<Claim>() { Claim1, Claim2 };
     }
 
-    public List<Claim> GetClaims()
+    public List<Claim> GetClaims(StatusType? statusFilter = null, LossType? lossFilter = null)
     {
-        return _claims;
+        IEnumerable<Claim> filteredClaims = _claims;
+
+        if (statusFilter.HasValue)
+        {
+            filteredClaims = filteredClaims.Where(c => c.Status == statusFilter.Value);
+        }
+
+        if (lossFilter.HasValue)
+        {
+            filteredClaims = filteredClaims.Where(c => c.LossType == lossFilter.Value);
+        }
+
+        return filteredClaims.ToList();
     }
 
     public Claim? GetClaimById(int claimId)

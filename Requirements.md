@@ -15,7 +15,7 @@
 2. Line items can’t be changed once the claim is Approved or Closed.
 3. Each line item’s total is Quantity × UnitCost, rounded to 2 decimal places.
 
-## Estimate calculation (your core business logic, so put it in a service class)
+## Estimate calculation
 
 1. The subtotal is the sum of all line item totals.
 2. Tax is 6.5% of the Materials line items only. This creates a nice edge case to test.

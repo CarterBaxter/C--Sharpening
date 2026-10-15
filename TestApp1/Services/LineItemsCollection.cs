@@ -104,4 +104,14 @@ public class LineItemsCollection : ILineItemsCollection
     {
         return _lineItems.Aggregate(0m, (acc, item) => acc + item.TotalCost());
     }
+
+    public decimal CalculateTotalTax()
+    {
+        return _lineItems.Sum(item => item.TaxAmount());
+    }
+
+    public decimal CalculateTotalCostWithTax()
+    {
+        return CalculateTotalCost() + CalculateTotalTax();
+    }
 }

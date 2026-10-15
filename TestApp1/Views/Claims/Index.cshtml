@@ -2,11 +2,27 @@
     ViewData["Title"] = "Home Page";
 }
 
-@model List<TestApp1.Models.Claim>
+@model TestApp1.Models.ClaimsIndexViewModel
 
 <div class="text-center">
     <h1 class="display-4">Claims</h1>
     <p>Manage your insurance claims here.</p>
+
+    <form method="get" asp-action="Index">
+        <h3>Filters</h3>
+        <label>Filter by loss type:</label>
+        <select asp-for="LossType" asp-items='Html.GetEnumSelectList<LossType>().Where(i => i.Value != "0")'>
+            <option value="">All</option>
+        </select>
+        <label>Filter by status:</label>
+        <select asp-for="Status" asp-items='Html.GetEnumSelectList<StatusType>().Where(i => i.Value != "0")'>
+            <option value="">All</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Apply Filters</button>
+        <a asp-action="Index" class="btn btn-secondary">Clear Filters</a>
+    
+    </form>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -19,14 +35,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (Claim claim in Model)
+            @foreach (Claim claim in Model.Claims)
             {
                 <tr>
                     <td>@claim.ClaimId</td>
                     <td>@claim.PolicyholderName</td>
                     <td>@claim.LossType</td>
                     <td>@claim.Status</td>
-                    <td>$@claim.LineItems.CalculateTotalCost()</td>
+                    <td>$@claim.CalculateTotalClaimCost()</td>
                     <td>
                         <a asp-action="Details" asp-route-id="@claim.ClaimId" class="btn btn-primary">View Details</a>
                     </td>

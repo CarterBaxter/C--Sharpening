@@ -13,10 +13,15 @@ public class ClaimsController : Controller
         this._claimsCollection = claimsCollection;
     }
 
-    public IActionResult Index()
-    {   
-        List<Claim> Claims = _claimsCollection.GetClaims();
-        return View(Claims);
+    public IActionResult Index(StatusType? status = null, LossType? lossType = null)
+    {
+        ClaimsIndexViewModel viewModel = new()
+        {
+            Claims = _claimsCollection.GetClaims(status, lossType),
+            Status = status,
+            LossType = lossType,
+        };
+        return View(viewModel);
     }
 
     public IActionResult Details(int id)

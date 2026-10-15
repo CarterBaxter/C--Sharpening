@@ -14,4 +14,8 @@ public interface ILineItemsCollection
     void DeleteLineItem(int itemId);
 
     decimal CalculateTotalCost();
+
+    decimal CalculateTotalTax();
+
+    decimal CalculateTotalCostWithTax();
 }
