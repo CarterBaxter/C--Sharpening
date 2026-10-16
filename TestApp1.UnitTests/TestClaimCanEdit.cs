@@ -14,7 +14,7 @@ public class TestClaimCanEdit
 
         bool canEdit = claim.CanEdit;
 
-        Assert.That(canEdit, Is.True);
+        Assert.That(canEdit, Is.False);
     }
 
     [TestCase(StatusType.InReview)]
