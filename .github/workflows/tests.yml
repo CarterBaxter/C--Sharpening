@@ -1,0 +1,29 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Get a copy of the repo onto the build machine
+      - uses: actions/checkout@v4
+
+      # Install the same .NET SDK version the projects target
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore packages
+        run: dotnet restore TestApp1.sln
+
+      - name: Build
+        run: dotnet build TestApp1.sln --no-restore --configuration Release
+
+      - name: Run tests
+        run: dotnet test TestApp1.sln --no-build --configuration Release --verbosity normal

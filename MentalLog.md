@@ -147,3 +147,34 @@ I think in the respect to my time as I want to have time to cook dinner
 tonight I am going to do the status changes myself because I know there
 are some inconsistencies there with the requirements and naming but 
 then I'll do the creation, editing, and deleting of claims and line items but then I'm going to have AI spot check me and fix up things I run through.
+
+### Log 8 - The Test Plan
+
+I am going to create a [TestPlan.md](./TestPlan.md) where I will start
+by making some tests based on the requirements first but I think I'll
+seperate them by Unit, Integration, and E2E. After I get that done I
+will set up a github action to run dotnet test on pushes. I dont have
+an API right now to test but if I get all that done then I'll write a
+simple one and set up postman tests.
+
+Note alot of the unit tests are also tests that should be done with 
+playwrite in the ui like testing claims can be created. It can be done
+as a unit test from the actaul claims model and a ui test that checks
+to ensure its a reachable thing for a user to do.
+
+As I right the test plan I notice that reqs claim 3 says that the status
+should be initialized as New but I changed that to Open in when coding.
+In this case its a slight rename so Im just going to change the requirement but in a real world scenario where these were given to me 
+by a client I wouldn't even attempt to change the reqs and instead would change the code so long as its a reasonable req. Otherwise I'd
+talk to who I could about the req to ensure expectations are reasonable
+and that we didnt agree to the impossible.
+
+I think I could probably get rid of the None status on claims and it 
+could be a bit cleaner, however it could also be good to test anyway
+because I'm never going to be handed the cleanest code ever either. So
+maybe testing it anyway would be better practice here.
+
+Okay I set up the testing project Finally got enough done on the test plan to be happy with it. But Im running out of time today so I wont get to all the tests and probably will just do a handfull. I wont get to playwright but I've touched it a bit in the past in a React TS app.
+
+I do like how I can set up different inital conditions so easily. For example the [TestClaimCanEdit](./TestApp1.UnitTests/TestClaimCanEdit.cs)
+tests where I can do all the different statuses initial conditions and just test the asserted behavior of editable or not.

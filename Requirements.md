@@ -4,7 +4,7 @@
 
 1. A user can view a list of all claims showing claim number, policyholder, loss type, status and estimate total.
 2. The list can be filtered by status and loss type.
-3. A user can create a claim. The claim number is generated automatically and the status starts as New.
+3. A user can create a claim. The claim number is generated automatically and the status starts as Open.
 4. A user can edit claim details while the claim is not InReview.
 5. A user can view claim details, including all line items and the calculated totals.
 6. A user can delete a claim only while it is Open.
@@ -30,5 +30,5 @@
 
 ## Validation
 
-1. All validation rules above are enforced on the server and shown as messages next to the relevant fields in the form.
-2. A future DateOfLoss is rejected.
+1. A future DateOfLoss is rejected.
+2. A future FiledDate is rejected.
